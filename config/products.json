@@ -1,0 +1,146 @@
+{
+  "$comment": "U3/V30 microSD cards (64GB/128GB) sold in India. Only listings that parse cleanly are included. See README.md.",
+  "currency": "INR",
+  "alert": {
+    "mode": "watermark",
+    "cooldownHours": 1,
+    "dailyEmailCap": 12,
+    "minSecondsBetweenEmails": 60
+  },
+  "polling": {
+    "amazon": 15,
+    "flipkart": 15
+  },
+  "products": [
+    {
+      "id": "samsung-evo-plus-64",
+      "name": "Samsung EVO Plus 64GB microSDXC (U3/V30)",
+      "short": "Samsung EVO Plus 64GB",
+      "offers": [
+        {
+          "retailer": "amazon",
+          "label": "Amazon.in",
+          "url": "https://www.amazon.in/dp/B08D1J84FY"
+        }
+      ]
+    },
+    {
+      "id": "samsung-evo-plus-128",
+      "name": "Samsung EVO Plus 128GB microSDXC (U3/V30)",
+      "short": "Samsung EVO Plus 128GB",
+      "offers": [
+        {
+          "retailer": "amazon",
+          "label": "Amazon.in",
+          "url": "https://www.amazon.in/dp/B08D1HKWV9"
+        },
+        {
+          "retailer": "flipkart",
+          "label": "Flipkart",
+          "url": "https://www.flipkart.com/samsung-evo-plus-128-gb-microsdxc-class-10-100-mbps-memory-card/p/itm10a4ad67a2f1d"
+        }
+      ]
+    },
+    {
+      "id": "sandisk-extreme-64",
+      "name": "SanDisk Extreme 64GB microSDXC (U3/V30)",
+      "short": "SanDisk Extreme 64GB",
+      "offers": [
+        {
+          "retailer": "amazon",
+          "label": "Amazon.in",
+          "url": "https://www.amazon.in/dp/B0BRSNPSK4"
+        }
+      ]
+    },
+    {
+      "id": "sandisk-extreme-128",
+      "name": "SanDisk Extreme 128GB microSDXC (U3/V30)",
+      "short": "SanDisk Extreme 128GB",
+      "offers": [
+        {
+          "retailer": "amazon",
+          "label": "Amazon.in",
+          "url": "https://www.amazon.in/dp/B06XYSPVM7"
+        }
+      ]
+    },
+    {
+      "id": "lexar-silver-plus-64",
+      "name": "Lexar Professional Silver Plus 64GB microSDXC (U3/V30)",
+      "short": "Lexar Silver Plus 64GB",
+      "offers": [
+        {
+          "retailer": "amazon",
+          "label": "Amazon.in",
+          "url": "https://www.amazon.in/dp/B0CZKLCQCF"
+        }
+      ]
+    },
+    {
+      "id": "lexar-silver-plus-128",
+      "name": "Lexar Professional Silver Plus 128GB microSDXC (U3/V30)",
+      "short": "Lexar Silver Plus 128GB",
+      "offers": [
+        {
+          "retailer": "amazon",
+          "label": "Amazon.in",
+          "url": "https://www.amazon.in/dp/B0D4CDCVNY"
+        },
+        {
+          "retailer": "flipkart",
+          "label": "Flipkart",
+          "url": "https://www.flipkart.com/lexar-lmssipl128g-bnang-msd-silver-plus-128-gb-microsdxc-uhs-class-3-205-mb-s-memory-card-compatible-gaming-console-camera-tablet-mobile/p/itma67c6ae097383"
+        }
+      ]
+    },
+    {
+      "id": "kingston-canvas-go-plus-64",
+      "name": "Kingston Canvas Go! Plus 64GB microSDXC (U3/V30)",
+      "short": "Kingston Canvas Go 64GB",
+      "offers": [
+        {
+          "retailer": "amazon",
+          "label": "Amazon.in",
+          "url": "https://www.amazon.in/dp/B0F2B123P2"
+        }
+      ]
+    },
+    {
+      "id": "kingston-canvas-go-plus-128",
+      "name": "Kingston Canvas Go! Plus 128GB microSDXC (U3/V30)",
+      "short": "Kingston Canvas Go 128GB",
+      "offers": [
+        {
+          "retailer": "amazon",
+          "label": "Amazon.in",
+          "url": "https://www.amazon.in/dp/B0858MY6RT"
+        }
+      ]
+    },
+    {
+      "id": "evm-enme-64",
+      "name": "EVM Elite 64GB microSDXC (U3/V30)",
+      "short": "EVM Elite 64GB",
+      "offers": [
+        {
+          "retailer": "flipkart",
+          "label": "Flipkart",
+          "url": "https://www.flipkart.com/evm-eetf-64gu3-u3-v30-64-gb-tf-card-class-10-100-mb-s-memory-compatible-camera-mobile-tablet/p/itm9085f465af772"
+        }
+      ]
+    },
+    {
+      "id": "evm-enme-128",
+      "name": "EVM Elite 128GB microSDXC (U3/V30)",
+      "short": "EVM Elite 128GB",
+      "offers": [
+        {
+          "retailer": "flipkart",
+          "label": "Flipkart",
+          "url": "https://www.flipkart.com/evm-eetf-128gu3-u3-v30-128-gb-tf-card-class-10-100-mb-s-memory-compatible-camera-mobile-tablet/p/itm162e79758f39d"
+        }
+      ]
+    }
+  ]
+}
