@@ -110,25 +110,22 @@ export function buildEmail({ alerts, health, state, config, now = new Date() }) 
 
       rows.push(`
         <tr${hot ? ' style="background:#fff7ed"' : ''}>
-          <td style="padding:10px 12px;border-bottom:1px solid #eee;font-weight:600">${esc(product.short)}</td>
-          <td style="padding:10px 12px;border-bottom:1px solid #eee">${esc(offer.label)}</td>
-          <td style="padding:10px 12px;border-bottom:1px solid #eee;text-align:right;font-weight:${hot ? 700 : 400}">
+          <td style="padding:8px;border-bottom:1px solid #eee"><a href="${esc(offer.url)}" style="color:#1d4ed8;text-decoration:none;font-weight:600">${esc(product.short)}</a></td>
+          <td style="padding:8px;border-bottom:1px solid #eee">${esc(offer.label)}</td>
+          <td style="padding:8px;border-bottom:1px solid #eee;text-align:right;font-weight:${hot ? 700 : 400}">
             ${s.price == null ? '—' : coin(s.price)}
           </td>
-          <td style="padding:10px 12px;border-bottom:1px solid #eee;text-align:right;color:#1d4ed8">
+          <td style="padding:8px;border-bottom:1px solid #eee;text-align:right;color:#1d4ed8">
             ${s.bestBankDiscount ? coin(s.bestBankDiscount) : '—'}
           </td>
-          <td style="padding:10px 12px;border-bottom:1px solid #eee;text-align:right;font-weight:600">
+          <td style="padding:8px;border-bottom:1px solid #eee;text-align:right;font-weight:600">
             ${effective == null ? '—' : coin(effective)}
           </td>
-          <td style="padding:10px 12px;border-bottom:1px solid #eee;text-align:right;color:#555">
+          <td style="padding:8px;border-bottom:1px solid #eee;text-align:right;color:#555">
             ${s.lowestEver != null ? coin(s.lowestEver) : '—'}
           </td>
-          <td style="padding:10px 12px;border-bottom:1px solid #eee;text-align:center">
+          <td style="padding:8px;border-bottom:1px solid #eee;text-align:center">
             ${s.available === false ? '<span style="color:#b91c1c">Out of stock</span>' : s.available ? 'In stock' : '—'}
-          </td>
-          <td style="padding:10px 12px;border-bottom:1px solid #eee;text-align:center">
-            <a href="${esc(offer.url)}" style="color:#1d4ed8;text-decoration:none">open ↗</a>
           </td>
         </tr>`);
     }
@@ -163,14 +160,13 @@ export function buildEmail({ alerts, health, state, config, now = new Date() }) 
       <table style="width:100%;border-collapse:collapse;margin-top:8px;font-size:13px">
         <thead>
           <tr style="text-align:left;color:#6b7280;font-size:11px;text-transform:uppercase;letter-spacing:.04em">
-            <th style="padding:8px 12px;border-bottom:1px solid #e5e7eb">Product</th>
-            <th style="padding:8px 12px;border-bottom:1px solid #e5e7eb">Store</th>
-            <th style="padding:8px 12px;border-bottom:1px solid #e5e7eb;text-align:right">Listed</th>
-            <th style="padding:8px 12px;border-bottom:1px solid #e5e7eb;text-align:right">Card offer</th>
-            <th style="padding:8px 12px;border-bottom:1px solid #e5e7eb;text-align:right">Effective</th>
-            <th style="padding:8px 12px;border-bottom:1px solid #e5e7eb;text-align:right">Lowest</th>
-            <th style="padding:8px 12px;border-bottom:1px solid #e5e7eb;text-align:center">Stock</th>
-            <th style="padding:8px 12px;border-bottom:1px solid #e5e7eb"></th>
+            <th style="padding:8px;border-bottom:1px solid #e5e7eb">Product</th>
+            <th style="padding:8px;border-bottom:1px solid #e5e7eb">Store</th>
+            <th style="padding:8px;border-bottom:1px solid #e5e7eb;text-align:right">Listed</th>
+            <th style="padding:8px;border-bottom:1px solid #e5e7eb;text-align:right">Card offer</th>
+            <th style="padding:8px;border-bottom:1px solid #e5e7eb;text-align:right">Effective</th>
+            <th style="padding:8px;border-bottom:1px solid #e5e7eb;text-align:right">Lowest</th>
+            <th style="padding:8px;border-bottom:1px solid #e5e7eb;text-align:center">Stock</th>
           </tr>
         </thead>
         <tbody>${rows.join('')}</tbody>
@@ -178,6 +174,7 @@ export function buildEmail({ alerts, health, state, config, now = new Date() }) 
       <div style="margin-top:16px;font-size:12px;color:#9ca3af;line-height:1.5">
         Alerts fire when a listed price falls below its all-time low, or when the set of bank/card offers changes.
         "Effective" is listed price minus the best single card offer. EMI and exchange offers are not included.
+        Tap a product name to open its listing.
       </div>
     </div>
   </div>
