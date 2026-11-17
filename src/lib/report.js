@@ -109,25 +109,19 @@ export function buildEmail({ alerts, health, state, config, now = new Date() }) 
       const effective = s.price != null ? Math.max(0, s.price - (s.bestBankDiscount || 0)) : null;
 
       rows.push(`
-        <tr${hot ? ' style="background:#fff7ed"' : ''}>
-          <td style="padding:8px;border-bottom:1px solid #eee"><a href="${esc(offer.url)}" style="color:#1d4ed8;text-decoration:none;font-weight:600">${esc(product.short)}</a></td>
-          <td style="padding:8px;border-bottom:1px solid #eee">${esc(offer.label)}</td>
-          <td style="padding:8px;border-bottom:1px solid #eee;text-align:right;font-weight:${hot ? 700 : 400}">
-            ${s.price == null ? '—' : coin(s.price)}
-          </td>
-          <td style="padding:8px;border-bottom:1px solid #eee;text-align:right;color:#1d4ed8">
-            ${s.bestBankDiscount ? coin(s.bestBankDiscount) : '—'}
-          </td>
-          <td style="padding:8px;border-bottom:1px solid #eee;text-align:right;font-weight:600">
-            ${effective == null ? '—' : coin(effective)}
-          </td>
-          <td style="padding:8px;border-bottom:1px solid #eee;text-align:right;color:#555">
-            ${s.lowestEver != null ? coin(s.lowestEver) : '—'}
-          </td>
-          <td style="padding:8px;border-bottom:1px solid #eee;text-align:center">
-            ${s.available === false ? '<span style="color:#b91c1c">Out of stock</span>' : s.available ? 'In stock' : '—'}
-          </td>
-        </tr>`);
+        <div style="border:1px solid ${hot ? '#fdba74' : '#e5e7eb'};background:${hot ? '#fff7ed' : '#fff'};border-radius:8px;padding:10px 12px;margin-top:8px;overflow-wrap:break-word">
+          <div style="font-size:14px">
+            <a href="${esc(offer.url)}" style="color:#1d4ed8;text-decoration:none;font-weight:700">${esc(product.short)}</a>
+            <span style="color:#6b7280;font-size:12px"> · ${esc(offer.label)}</span>
+          </div>
+          <div style="margin-top:6px;font-size:12px;color:#374151;line-height:1.8">
+            Listed <b style="color:#111">${s.price == null ? '—' : coin(s.price)}</b>
+            · Card offer ${s.bestBankDiscount ? `<b style="color:#1d4ed8">${coin(s.bestBankDiscount)}</b>` : '—'}
+            · Effective <b>${effective == null ? '—' : coin(effective)}</b>
+            · Lowest ${s.lowestEver != null ? coin(s.lowestEver) : '—'}
+            · ${s.available === false ? '<span style="color:#b91c1c">Out of stock</span>' : s.available ? 'In stock' : '—'}
+          </div>
+        </div>`);
     }
   }
 
@@ -157,20 +151,7 @@ export function buildEmail({ alerts, health, state, config, now = new Date() }) 
       ${cards || '<div style="color:#374151">No price changes in this check.</div>'}
       ${healthBlock}
       <div style="margin-top:24px;font-size:12px;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;font-weight:700">All tracked prices</div>
-      <table style="width:100%;border-collapse:collapse;margin-top:8px;font-size:13px">
-        <thead>
-          <tr style="text-align:left;color:#6b7280;font-size:11px;text-transform:uppercase;letter-spacing:.04em">
-            <th style="padding:8px;border-bottom:1px solid #e5e7eb">Product</th>
-            <th style="padding:8px;border-bottom:1px solid #e5e7eb">Store</th>
-            <th style="padding:8px;border-bottom:1px solid #e5e7eb;text-align:right">Listed</th>
-            <th style="padding:8px;border-bottom:1px solid #e5e7eb;text-align:right">Card offer</th>
-            <th style="padding:8px;border-bottom:1px solid #e5e7eb;text-align:right">Effective</th>
-            <th style="padding:8px;border-bottom:1px solid #e5e7eb;text-align:right">Lowest</th>
-            <th style="padding:8px;border-bottom:1px solid #e5e7eb;text-align:center">Stock</th>
-          </tr>
-        </thead>
-        <tbody>${rows.join('')}</tbody>
-      </table>
+      <div style="margin-top:8px">${rows.join('')}</div>
       <div style="margin-top:16px;font-size:12px;color:#9ca3af;line-height:1.5">
         Alerts fire when a listed price falls below its all-time low, or when the set of bank/card offers changes.
         "Effective" is listed price minus the best single card offer. EMI and exchange offers are not included.
