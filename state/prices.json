@@ -1,1 +1,401 @@
-{"version":1,"products":{},"meta":{"createdAt":null,"lastRunAt":null,"lastCommitAt":null,"sent":{"date":null,"count":0,"lastSentAt":null},"healthAlerted":{}}}
+{
+  "version": 1,
+  "products": {
+    "samsung-evo-plus-64": {
+      "offers": {
+        "amazon": {
+          "price": 2439,
+          "compareAt": null,
+          "currency": "INR",
+          "available": true,
+          "watermark": 2439,
+          "lowestEver": 2439,
+          "lastSeenAt": "2026-11-17T10:14:24.545Z",
+          "lastPolledAt": "2026-11-17T10:14:24.545Z",
+          "lastAlertAt": null,
+          "fails": 0,
+          "lastError": null,
+          "bankOffers": [],
+          "bestBankDiscount": 0,
+          "effectivePrice": 2439,
+          "bankHash": "none",
+          "effectiveWatermark": 2439,
+          "effectiveLow": 2439
+        }
+      }
+    },
+    "samsung-evo-plus-128": {
+      "offers": {
+        "amazon": {
+          "price": 5499,
+          "compareAt": null,
+          "currency": "INR",
+          "available": true,
+          "watermark": 5499,
+          "lowestEver": 5499,
+          "lastSeenAt": "2026-11-17T10:14:24.545Z",
+          "lastPolledAt": "2026-11-17T10:14:24.545Z",
+          "lastAlertAt": null,
+          "fails": 0,
+          "lastError": null,
+          "bankOffers": [],
+          "bestBankDiscount": 0,
+          "effectivePrice": 5499,
+          "bankHash": "none",
+          "effectiveWatermark": 5499,
+          "effectiveLow": 5499
+        },
+        "flipkart": {
+          "price": 1209,
+          "compareAt": null,
+          "currency": "INR",
+          "available": false,
+          "watermark": 1209,
+          "lowestEver": 1209,
+          "lastSeenAt": "2026-11-17T10:14:24.545Z",
+          "lastPolledAt": "2026-11-17T10:14:24.545Z",
+          "lastAlertAt": null,
+          "fails": 0,
+          "lastError": null,
+          "bankOffers": [
+            {
+              "bank": "Flipkart Axis",
+              "discount": 61
+            },
+            {
+              "bank": "Flipkart SBI",
+              "discount": 61
+            }
+          ],
+          "bestBankDiscount": 61,
+          "effectivePrice": 1148,
+          "bankHash": "890d371d7384",
+          "effectiveWatermark": 1148,
+          "effectiveLow": 1148
+        }
+      }
+    },
+    "sandisk-extreme-64": {
+      "offers": {
+        "amazon": {
+          "price": 1263,
+          "compareAt": null,
+          "currency": "INR",
+          "available": true,
+          "watermark": 1263,
+          "lowestEver": 1263,
+          "lastSeenAt": "2026-11-17T10:14:24.545Z",
+          "lastPolledAt": "2026-11-17T10:14:24.545Z",
+          "lastAlertAt": null,
+          "fails": 0,
+          "lastError": null,
+          "bankOffers": [],
+          "bestBankDiscount": 0,
+          "effectivePrice": 1263,
+          "bankHash": "none",
+          "effectiveWatermark": 1263,
+          "effectiveLow": 1263
+        }
+      }
+    },
+    "sandisk-extreme-128": {
+      "offers": {
+        "amazon": {
+          "price": 3449,
+          "compareAt": null,
+          "currency": "INR",
+          "available": true,
+          "watermark": 3449,
+          "lowestEver": 3449,
+          "lastSeenAt": "2026-11-17T10:14:24.545Z",
+          "lastPolledAt": "2026-11-17T10:14:24.545Z",
+          "lastAlertAt": null,
+          "fails": 0,
+          "lastError": null,
+          "bankOffers": [],
+          "bestBankDiscount": 0,
+          "effectivePrice": 3449,
+          "bankHash": "none",
+          "effectiveWatermark": 3449,
+          "effectiveLow": 3449
+        }
+      }
+    },
+    "lexar-silver-plus-64": {
+      "offers": {
+        "amazon": {
+          "price": 3649,
+          "compareAt": null,
+          "currency": "INR",
+          "available": true,
+          "watermark": 3649,
+          "lowestEver": 3649,
+          "lastSeenAt": "2026-11-17T10:14:24.545Z",
+          "lastPolledAt": "2026-11-17T10:14:24.545Z",
+          "lastAlertAt": null,
+          "fails": 0,
+          "lastError": null,
+          "bankOffers": [
+            {
+              "bank": "Amazon Pay ICICI Bank Credit Card",
+              "discount": 109,
+              "note": ""
+            },
+            {
+              "bank": "Coupon",
+              "discount": 74,
+              "note": ""
+            }
+          ],
+          "bestBankDiscount": 109,
+          "effectivePrice": 3540,
+          "bankHash": "5d280c1bd075",
+          "effectiveWatermark": 3540,
+          "effectiveLow": 3540
+        }
+      }
+    },
+    "lexar-silver-plus-128": {
+      "offers": {
+        "amazon": {
+          "price": 4999,
+          "compareAt": null,
+          "currency": "INR",
+          "available": true,
+          "watermark": 4999,
+          "lowestEver": 4999,
+          "lastSeenAt": "2026-11-17T10:14:24.545Z",
+          "lastPolledAt": "2026-11-17T10:14:24.545Z",
+          "lastAlertAt": null,
+          "fails": 0,
+          "lastError": null,
+          "bankOffers": [
+            {
+              "bank": "Coupon",
+              "discount": 100,
+              "note": ""
+            }
+          ],
+          "bestBankDiscount": 100,
+          "effectivePrice": 4899,
+          "bankHash": "b400a98d3194",
+          "effectiveWatermark": 4899,
+          "effectiveLow": 4899
+        },
+        "flipkart": {
+          "price": 1449,
+          "compareAt": null,
+          "currency": "INR",
+          "available": false,
+          "watermark": 1449,
+          "lowestEver": 1449,
+          "lastSeenAt": "2026-11-17T10:14:24.545Z",
+          "lastPolledAt": "2026-11-17T10:14:24.545Z",
+          "lastAlertAt": null,
+          "fails": 0,
+          "lastError": null,
+          "bankOffers": [
+            {
+              "bank": "Flipkart Axis",
+              "discount": 73
+            },
+            {
+              "bank": "Flipkart SBI",
+              "discount": 73
+            }
+          ],
+          "bestBankDiscount": 73,
+          "effectivePrice": 1376,
+          "bankHash": "53fe14bef337",
+          "effectiveWatermark": 1376,
+          "effectiveLow": 1376
+        }
+      }
+    },
+    "kingston-canvas-go-plus-64": {
+      "offers": {
+        "amazon": {
+          "price": 4499,
+          "compareAt": null,
+          "currency": "INR",
+          "available": true,
+          "watermark": 4499,
+          "lowestEver": 4499,
+          "lastSeenAt": "2026-11-17T10:14:24.545Z",
+          "lastPolledAt": "2026-11-17T10:14:24.545Z",
+          "lastAlertAt": null,
+          "fails": 0,
+          "lastError": null,
+          "bankOffers": [],
+          "bestBankDiscount": 0,
+          "effectivePrice": 4499,
+          "bankHash": "none",
+          "effectiveWatermark": 4499,
+          "effectiveLow": 4499
+        }
+      }
+    },
+    "kingston-canvas-go-plus-128": {
+      "offers": {
+        "amazon": {
+          "price": 2660,
+          "compareAt": null,
+          "currency": "INR",
+          "available": true,
+          "watermark": 2660,
+          "lowestEver": 2660,
+          "lastSeenAt": "2026-11-17T10:14:24.545Z",
+          "lastPolledAt": "2026-11-17T10:14:24.545Z",
+          "lastAlertAt": null,
+          "fails": 0,
+          "lastError": null,
+          "bankOffers": [],
+          "bestBankDiscount": 0,
+          "effectivePrice": 2660,
+          "bankHash": "none",
+          "effectiveWatermark": 2660,
+          "effectiveLow": 2660
+        }
+      }
+    },
+    "evm-enme-64": {
+      "offers": {
+        "flipkart": {
+          "price": 999,
+          "compareAt": null,
+          "currency": "INR",
+          "available": true,
+          "watermark": 999,
+          "lowestEver": 999,
+          "lastSeenAt": "2026-11-17T10:14:24.545Z",
+          "lastPolledAt": "2026-11-17T10:14:24.545Z",
+          "lastAlertAt": null,
+          "fails": 0,
+          "lastError": null,
+          "bankOffers": [
+            {
+              "bank": "BHIM",
+              "discount": 50
+            },
+            {
+              "bank": "CRED",
+              "discount": 50
+            },
+            {
+              "bank": "Flipkart Axis",
+              "discount": 50
+            },
+            {
+              "bank": "Flipkart SBI",
+              "discount": 50
+            },
+            {
+              "bank": "Freecharge",
+              "discount": 50
+            },
+            {
+              "bank": "Google Pay",
+              "discount": 50
+            },
+            {
+              "bank": "Mobikwik",
+              "discount": 50
+            },
+            {
+              "bank": "Multiple Banks",
+              "discount": 50
+            },
+            {
+              "bank": "Paytm",
+              "discount": 50
+            },
+            {
+              "bank": "PhonePe",
+              "discount": 50
+            },
+            {
+              "bank": "SBI Pay",
+              "discount": 50
+            },
+            {
+              "bank": "SuperMoney",
+              "discount": 50
+            },
+            {
+              "bank": "Truecaller",
+              "discount": 50
+            }
+          ],
+          "bestBankDiscount": 50,
+          "effectivePrice": 949,
+          "bankHash": "9314b700989c",
+          "effectiveWatermark": 949,
+          "effectiveLow": 949
+        }
+      }
+    },
+    "evm-enme-128": {
+      "offers": {
+        "flipkart": {
+          "price": 1999,
+          "compareAt": null,
+          "currency": "INR",
+          "available": true,
+          "watermark": 1999,
+          "lowestEver": 1999,
+          "lastSeenAt": "2026-11-17T10:14:24.545Z",
+          "lastPolledAt": "2026-11-17T10:14:24.545Z",
+          "lastAlertAt": null,
+          "fails": 0,
+          "lastError": null,
+          "bankOffers": [
+            {
+              "bank": "BHIM",
+              "discount": 100
+            },
+            {
+              "bank": "CRED",
+              "discount": 100
+            },
+            {
+              "bank": "Flipkart Axis",
+              "discount": 100
+            },
+            {
+              "bank": "Flipkart SBI",
+              "discount": 100
+            },
+            {
+              "bank": "Google Pay",
+              "discount": 100
+            },
+            {
+              "bank": "Paytm",
+              "discount": 100
+            },
+            {
+              "bank": "SuperMoney",
+              "discount": 100
+            }
+          ],
+          "bestBankDiscount": 100,
+          "effectivePrice": 1899,
+          "bankHash": "d3b835c5c080",
+          "effectiveWatermark": 1899,
+          "effectiveLow": 1899
+        }
+      }
+    }
+  },
+  "meta": {
+    "createdAt": "2026-11-17T10:14:24.545Z",
+    "lastRunAt": "2026-11-17T10:14:24.545Z",
+    "lastCommitAt": "2026-11-17T10:14:24.545Z",
+    "sent": {
+      "date": null,
+      "count": 0,
+      "lastSentAt": null
+    },
+    "healthAlerted": {}
+  }
+}
