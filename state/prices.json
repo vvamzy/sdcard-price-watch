@@ -4,20 +4,20 @@
     "samsung-evo-plus-64": {
       "offers": {
         "amazon": {
-          "price": 2439,
+          "price": 2969,
           "compareAt": null,
           "currency": "INR",
           "available": true,
           "watermark": 2439,
           "lowestEver": 2439,
-          "lastSeenAt": "2026-11-18T01:44:34.882Z",
-          "lastPolledAt": "2026-11-18T01:44:34.882Z",
+          "lastSeenAt": "2026-11-18T09:34:46.878Z",
+          "lastPolledAt": "2026-11-18T09:34:46.878Z",
           "lastAlertAt": null,
           "fails": 0,
           "lastError": null,
           "bankOffers": [],
           "bestBankDiscount": 0,
-          "effectivePrice": 2439,
+          "effectivePrice": 2969,
           "bankHash": "none",
           "effectiveWatermark": 2439,
           "effectiveLow": 2439
@@ -33,8 +33,8 @@
           "available": true,
           "watermark": 5499,
           "lowestEver": 5499,
-          "lastSeenAt": "2026-11-18T01:44:34.882Z",
-          "lastPolledAt": "2026-11-18T01:44:34.882Z",
+          "lastSeenAt": "2026-11-18T09:34:46.878Z",
+          "lastPolledAt": "2026-11-18T09:34:46.878Z",
           "lastAlertAt": null,
           "fails": 0,
           "lastError": null,
@@ -52,8 +52,8 @@
           "available": false,
           "watermark": 1209,
           "lowestEver": 1209,
-          "lastSeenAt": "2026-11-18T01:44:34.882Z",
-          "lastPolledAt": "2026-11-18T01:44:34.882Z",
+          "lastSeenAt": "2026-11-18T09:34:46.878Z",
+          "lastPolledAt": "2026-11-18T09:34:46.878Z",
           "lastAlertAt": null,
           "fails": 0,
           "lastError": null,
@@ -84,8 +84,8 @@
           "available": true,
           "watermark": 1263,
           "lowestEver": 1263,
-          "lastSeenAt": "2026-11-18T01:44:34.882Z",
-          "lastPolledAt": "2026-11-18T01:44:34.882Z",
+          "lastSeenAt": "2026-11-18T09:34:46.878Z",
+          "lastPolledAt": "2026-11-18T09:34:46.878Z",
           "lastAlertAt": null,
           "fails": 0,
           "lastError": null,
@@ -101,20 +101,20 @@
     "sandisk-extreme-128": {
       "offers": {
         "amazon": {
-          "price": 4699,
+          "price": 3449,
           "compareAt": null,
           "currency": "INR",
           "available": true,
           "watermark": 3449,
           "lowestEver": 3449,
-          "lastSeenAt": "2026-11-18T01:44:34.882Z",
-          "lastPolledAt": "2026-11-18T01:44:34.882Z",
+          "lastSeenAt": "2026-11-18T09:34:46.878Z",
+          "lastPolledAt": "2026-11-18T09:34:46.878Z",
           "lastAlertAt": null,
           "fails": 0,
           "lastError": null,
           "bankOffers": [],
           "bestBankDiscount": 0,
-          "effectivePrice": 4699,
+          "effectivePrice": 3449,
           "bankHash": "none",
           "effectiveWatermark": 3449,
           "effectiveLow": 3449
@@ -130,26 +130,21 @@
           "available": true,
           "watermark": 3649,
           "lowestEver": 3649,
-          "lastSeenAt": "2026-11-18T01:44:34.882Z",
-          "lastPolledAt": "2026-11-18T01:44:34.882Z",
-          "lastAlertAt": null,
+          "lastSeenAt": "2026-11-18T09:34:46.878Z",
+          "lastPolledAt": "2026-11-18T09:34:46.878Z",
+          "lastAlertAt": "2026-11-18T09:34:46.878Z",
           "fails": 0,
           "lastError": null,
           "bankOffers": [
             {
               "bank": "Amazon Pay ICICI Bank Credit Card",
-              "discount": 109,
-              "note": ""
-            },
-            {
-              "bank": "Coupon",
-              "discount": 74,
+              "discount": 107,
               "note": ""
             }
           ],
-          "bestBankDiscount": 109,
-          "effectivePrice": 3540,
-          "bankHash": "5d280c1bd075",
+          "bestBankDiscount": 107,
+          "effectivePrice": 3542,
+          "bankHash": "466f9f0f6e04",
           "effectiveWatermark": 3540,
           "effectiveLow": 3540
         }
@@ -164,8 +159,8 @@
           "available": true,
           "watermark": 4999,
           "lowestEver": 4999,
-          "lastSeenAt": "2026-11-18T01:44:34.882Z",
-          "lastPolledAt": "2026-11-18T01:44:34.882Z",
+          "lastSeenAt": "2026-11-18T09:34:46.878Z",
+          "lastPolledAt": "2026-11-18T09:34:46.878Z",
           "lastAlertAt": null,
           "fails": 0,
           "lastError": null,
@@ -189,8 +184,8 @@
           "available": false,
           "watermark": 1449,
           "lowestEver": 1449,
-          "lastSeenAt": "2026-11-18T01:44:34.882Z",
-          "lastPolledAt": "2026-11-18T01:44:34.882Z",
+          "lastSeenAt": "2026-11-18T09:34:46.878Z",
+          "lastPolledAt": "2026-11-18T09:34:46.878Z",
           "lastAlertAt": null,
           "fails": 0,
           "lastError": null,
@@ -221,8 +216,8 @@
           "available": true,
           "watermark": 4499,
           "lowestEver": 4499,
-          "lastSeenAt": "2026-11-18T01:44:34.882Z",
-          "lastPolledAt": "2026-11-18T01:44:34.882Z",
+          "lastSeenAt": "2026-11-18T09:34:46.878Z",
+          "lastPolledAt": "2026-11-18T09:34:46.878Z",
           "lastAlertAt": null,
           "fails": 0,
           "lastError": null,
@@ -244,8 +239,8 @@
           "available": true,
           "watermark": 2660,
           "lowestEver": 2660,
-          "lastSeenAt": "2026-11-18T01:44:34.882Z",
-          "lastPolledAt": "2026-11-18T01:44:34.882Z",
+          "lastSeenAt": "2026-11-18T09:34:46.878Z",
+          "lastPolledAt": "2026-11-18T09:34:46.878Z",
           "lastAlertAt": null,
           "fails": 0,
           "lastError": null,
@@ -267,20 +262,12 @@
           "available": true,
           "watermark": 999,
           "lowestEver": 999,
-          "lastSeenAt": "2026-11-18T01:44:34.882Z",
-          "lastPolledAt": "2026-11-18T01:44:34.882Z",
-          "lastAlertAt": null,
+          "lastSeenAt": "2026-11-18T09:34:46.878Z",
+          "lastPolledAt": "2026-11-18T09:34:46.878Z",
+          "lastAlertAt": "2026-11-18T09:34:46.878Z",
           "fails": 0,
           "lastError": null,
           "bankOffers": [
-            {
-              "bank": "BHIM",
-              "discount": 50
-            },
-            {
-              "bank": "CRED",
-              "discount": 50
-            },
             {
               "bank": "Flipkart Axis",
               "discount": 50
@@ -288,47 +275,11 @@
             {
               "bank": "Flipkart SBI",
               "discount": 50
-            },
-            {
-              "bank": "Freecharge",
-              "discount": 50
-            },
-            {
-              "bank": "Google Pay",
-              "discount": 50
-            },
-            {
-              "bank": "Mobikwik",
-              "discount": 50
-            },
-            {
-              "bank": "Multiple Banks",
-              "discount": 50
-            },
-            {
-              "bank": "Paytm",
-              "discount": 50
-            },
-            {
-              "bank": "PhonePe",
-              "discount": 50
-            },
-            {
-              "bank": "SBI Pay",
-              "discount": 50
-            },
-            {
-              "bank": "SuperMoney",
-              "discount": 50
-            },
-            {
-              "bank": "Truecaller",
-              "discount": 50
             }
           ],
           "bestBankDiscount": 50,
           "effectivePrice": 949,
-          "bankHash": "9314b700989c",
+          "bankHash": "17f4fdf9becc",
           "effectiveWatermark": 949,
           "effectiveLow": 949
         }
@@ -343,8 +294,8 @@
           "available": true,
           "watermark": 1999,
           "lowestEver": 1999,
-          "lastSeenAt": "2026-11-18T01:44:34.882Z",
-          "lastPolledAt": "2026-11-18T01:44:34.882Z",
+          "lastSeenAt": "2026-11-18T09:34:46.878Z",
+          "lastPolledAt": "2026-11-18T09:34:46.878Z",
           "lastAlertAt": null,
           "fails": 0,
           "lastError": null,
@@ -389,12 +340,12 @@
   },
   "meta": {
     "createdAt": "2026-11-17T10:14:24.545Z",
-    "lastRunAt": "2026-11-18T01:44:34.882Z",
-    "lastCommitAt": "2026-11-18T01:44:34.882Z",
+    "lastRunAt": "2026-11-18T09:34:46.878Z",
+    "lastCommitAt": "2026-11-18T09:34:46.878Z",
     "sent": {
-      "date": null,
-      "count": 0,
-      "lastSentAt": null
+      "date": "2026-11-18",
+      "count": 1,
+      "lastSentAt": "2026-11-18T09:34:46.878Z"
     },
     "healthAlerted": {}
   }
