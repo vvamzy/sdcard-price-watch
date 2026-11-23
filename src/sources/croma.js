@@ -1,5 +1,6 @@
 import { fetchText } from '../lib/http.js';
-import { extractProduct, isOutOfStock } from '../lib/jsonld.js';
+import { isOutOfStock } from '../lib/jsonld.js';
+import { readOffer } from './direct.js';
 
 /**
  * Croma (croma.com) is fronted by Akamai. Product pages usually render fine
@@ -16,20 +17,7 @@ export async function fetchPrice(offer) {
 
   if (isBlocked(body)) throw new Error('Croma returned an Akamai bot page');
 
-  const product = extractProduct(body);
-  if (!product || !product.price) throw new Error('no price found on Croma page');
-
-  return {
-    price: product.price,
-    currency: product.currency || 'INR',
-    available: product.available && !isOutOfStock(body),
-    compareAt: null,
-    bankOffers: [],
-    bestBankDiscount: 0,
-    title: product.name,
-    variantTitle: null,
-    productUrl: offer.url.split('?')[0],
-  };
+  return readOffer(body, offer);
 }
 
 export function isBlocked(html) {

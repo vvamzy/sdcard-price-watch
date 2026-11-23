@@ -29,8 +29,8 @@ export function buildSubject(alerts, health) {
   }
   if (drops.length === 0 && banks.length >= 1) {
     const b = banks[0];
-    const best = Math.max(...banks.map((x) => x.to));
-    const label = best > 0 ? `${coin(best)} off` : 'card offers cleared';
+    if (banks.length > 1) return `💳 Card offers changed on ${banks.length} listings — SD card price watch`;
+    const label = b.to > 0 ? `${coin(b.to)} off` : 'card offers cleared';
     return `💳 Bank offer updated — ${b.product.short} (${b.offer.label}): ${label}`;
   }
   if (drops.length >= 1 && banks.length >= 1) {
@@ -39,7 +39,7 @@ export function buildSubject(alerts, health) {
   if (drops.length > 1) {
     return `🔻 ${drops.length} price drops — ${[...new Set(drops.map((d) => d.product.short))].join(', ')}`;
   }
-  return `⚠️ Price tracker: ${health.length} source${health.length === 1 ? '' : 's'} failing`;
+  return health.length ? `⚠️ Price tracker: ${health.length} source${health.length === 1 ? '' : 's'} failing` : 'SD card price watch — snapshot';
 }
 
 function priceCard(a) {
@@ -107,19 +107,20 @@ export function buildEmail({ alerts, health, state, config, now = new Date() }) 
 
       const hot = alerts.some((a) => a.product.id === product.id && a.offer.retailer === offer.retailer);
       const effective = s.price != null ? Math.max(0, s.price - (s.bestBankDiscount || 0)) : null;
+      const lowest = s.available === true && s.price != null ? Math.min(s.lowestEver ?? s.price, s.price) : s.lowestEver;
+      const card = s.bankOffers?.find(o => o.discount === s.bestBankDiscount)?.bank;
 
       rows.push(`
         <div style="border:1px solid ${hot ? '#fdba74' : '#e5e7eb'};background:${hot ? '#fff7ed' : '#fff'};border-radius:8px;padding:10px 12px;margin-top:8px;overflow-wrap:break-word">
-          <div style="font-size:14px">
-            <a href="${esc(offer.url)}" style="color:#1d4ed8;text-decoration:none;font-weight:700">${esc(product.short)}</a>
-            <span style="color:#6b7280;font-size:12px"> · ${esc(offer.label)}</span>
+          <div style="font-size:16px;line-height:1.4">
+            <a href="${esc(offer.url)}" style="display:inline-block;padding:6px 0;color:#1d4ed8;text-decoration:underline;font-weight:700">${esc(product.short)}</a>
+            <span style="color:#4b5563;font-size:14px"> · ${esc(offer.label)}</span>
           </div>
-          <div style="margin-top:6px;font-size:12px;color:#374151;line-height:1.8">
-            Listed <b style="color:#111">${s.price == null ? '—' : coin(s.price)}</b>
-            · Card offer ${s.bestBankDiscount ? `<b style="color:#1d4ed8">${coin(s.bestBankDiscount)}</b>` : '—'}
-            · Effective <b>${effective == null ? '—' : coin(effective)}</b>
-            · Lowest ${s.lowestEver != null ? coin(s.lowestEver) : '—'}
-            · ${s.available === false ? '<span style="color:#b91c1c">Out of stock</span>' : s.available ? 'In stock' : '—'}
+          <div style="margin-top:4px;font-size:14px;color:#374151;line-height:1.6">
+            <div>Listed <b>${s.price == null ? '—' : coin(s.price)}</b> · ${s.available === false ? '<span style="color:#b91c1c">Out of stock</span>' : s.available ? 'In stock' : 'Stock unknown'}</div>
+            <div>Card offer: ${s.bestBankDiscount ? `${coin(s.bestBankDiscount)} off${card ? ` (${esc(card)})` : ''}` : '—'}</div>
+            <div>Effective <b>${effective == null ? '—' : coin(effective)}</b> · Lowest ${lowest != null ? coin(lowest) : '—'}</div>
+            ${s.fails ? `<div style="color:#92400e">Latest check failed. ${s.lastSeenAt ? `Last reading: ${istTime(new Date(s.lastSeenAt))} IST.` : 'No successful reading yet.'}</div>` : ''}
           </div>
         </div>`);
     }
@@ -141,17 +142,18 @@ export function buildEmail({ alerts, health, state, config, now = new Date() }) 
   const cards = [...alerts.filter((a) => a.kind === 'price').map(priceCard), ...alerts.filter((a) => a.kind === 'bank').map(bankCard)].join('');
 
   const html = `<!doctype html>
-<html><body style="margin:0;padding:24px;background:#f6f7f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#111">
-  <div style="max-width:760px;margin:0 auto;background:#fff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden">
-    <div style="padding:18px 20px;border-bottom:1px solid #eee">
+<html lang="en"><head><meta name="viewport" content="width=device-width, initial-scale=1"></head>
+<body style="margin:0;padding:8px;background:#f6f7f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#111">
+  <div style="max-width:680px;margin:0 auto;background:#fff;border:1px solid #e5e7eb;border-radius:12px;overflow-wrap:anywhere;word-wrap:break-word">
+    <div style="padding:14px 12px;border-bottom:1px solid #eee">
       <div style="font-size:16px;font-weight:700">SD card price watch</div>
       <div style="font-size:13px;color:#6b7280">U3/V30 microSD · 64/128GB · India · ${istTime(now)} IST</div>
     </div>
-    <div style="padding:18px 20px">
+    <div style="padding:14px 12px">
       ${cards || '<div style="color:#374151">No price changes in this check.</div>'}
       ${healthBlock}
       <div style="margin-top:24px;font-size:12px;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;font-weight:700">All tracked prices</div>
-      <div style="margin-top:8px">${rows.join('')}</div>
+      <div style="margin-top:8px">${rows.join('') || 'No readings yet. The first price check will populate this list.'}</div>
       <div style="margin-top:16px;font-size:12px;color:#9ca3af;line-height:1.5">
         Alerts fire when a listed price falls below its all-time low, or when the set of bank/card offers changes.
         "Effective" is listed price minus the best single card offer. EMI and exchange offers are not included.

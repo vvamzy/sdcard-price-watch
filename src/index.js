@@ -12,9 +12,6 @@ const DRY_RUN = argv.has('--dry-run') || process.env.DRY_RUN === '1';
 const FORCE = argv.has('--force') || process.env.FORCE === '1';
 const JSON_OUT = argv.has('--json');
 
-// Persist state at most this often unless something actually happened.
-const MAX_STATE_AGE_MINUTES = 30;
-
 function log(msg) {
   console.log(msg);
 }
@@ -28,6 +25,10 @@ async function main() {
   log(`SD card price watch · ${started.toISOString()}${CHECK ? ' · check only' : ''}${DRY_RUN ? ' · dry run' : ''}`);
 
   if (argv.has('--test-email')) {
+    if (CHECK || DRY_RUN) {
+      log('test email skipped in check/dry-run mode');
+      return;
+    }
     const email = buildEmail({ alerts: [], health: [], state, config, now: started });
     email.subject = '✅ SD card price watch — Gmail/SMTP test';
     await send(email);
@@ -72,18 +73,12 @@ async function main() {
 
   commit({ state, observations, alerts, health, delivered, now: started });
 
-  const priceMoved = observations.some(
-    (o) => !o.failed && (o.result.price !== o.prev.watermark || o.bankChanged || o.state.fails > 0)
-  );
-  const lastCommit = state.meta.lastCommitAt ? new Date(state.meta.lastCommitAt).getTime() : 0;
-  const stale = started.getTime() - lastCommit > MAX_STATE_AGE_MINUTES * 60_000;
-  const shouldPersist = !DRY_RUN && (priceMoved || alerts.length > 0 || health.length > 0 || stale);
-
-  if (shouldPersist) {
+  // Even an unchanged price or a failed check affects cadence and consecutive failures.
+  if (!DRY_RUN && observations.length) {
     state.meta.lastRunAt = started.toISOString();
     state.meta.lastCommitAt = started.toISOString();
     saveState(state);
-    log(`state saved (${priceMoved ? 'price changed' : stale ? 'cadence heartbeat' : 'event'})`);
+    log(`state saved (${observations.length} listings checked)`);
   } else {
     log('state unchanged, not saved');
   }

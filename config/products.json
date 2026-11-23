@@ -9,7 +9,10 @@
   },
   "polling": {
     "amazon": 15,
-    "flipkart": 15
+    "flipkart": 15,
+    "croma": 30,
+    "fotocentre": 30,
+    "heyjimmy": 30
   },
   "products": [
     {
@@ -50,6 +53,13 @@
           "retailer": "amazon",
           "label": "Amazon.in",
           "url": "https://www.amazon.in/dp/B0BRSNPSK4"
+        },
+        {
+          "retailer": "croma",
+          "label": "Croma",
+          "sku": "263189",
+          "optional": true,
+          "url": "https://www.croma.com/sandisk-extreme-microsdxc-64gb-class-10-190mb-s-memory-card/p/263189"
         }
       ]
     },
@@ -62,6 +72,19 @@
           "retailer": "amazon",
           "label": "Amazon.in",
           "url": "https://www.amazon.in/dp/B06XYSPVM7"
+        },
+        {
+          "retailer": "croma",
+          "label": "Croma",
+          "sku": "263190",
+          "optional": true,
+          "url": "https://www.croma.com/sandisk-extreme-microsdxc-128gb-class-10-class-30-class-3-190mb-s-memory-card/p/263190"
+        },
+        {
+          "retailer": "heyjimmy",
+          "label": "Hey Jimmy",
+          "sku": "SDSQXAA-128G-GN6MA",
+          "url": "https://heyjimmy.in/products/sandisk-128gb-extreme-microsdxc-uhs-i-memory-card-190mb-s?variant=51203720511764"
         }
       ]
     },
@@ -74,6 +97,11 @@
           "retailer": "amazon",
           "label": "Amazon.in",
           "url": "https://www.amazon.in/dp/B0CZKLCQCF"
+        },
+        {
+          "retailer": "fotocentre",
+          "label": "Foto Centre India",
+          "url": "https://fotocentreindia.com/product/lexar-64gb-microsd-silver-plus-memory-card/"
         }
       ]
     },
@@ -86,6 +114,11 @@
           "retailer": "amazon",
           "label": "Amazon.in",
           "url": "https://www.amazon.in/dp/B0D4CDCVNY"
+        },
+        {
+          "retailer": "fotocentre",
+          "label": "Foto Centre India",
+          "url": "https://fotocentreindia.com/product/lexar-128gb-microsd-silver-plus-memory-card-india/"
         },
         {
           "retailer": "flipkart",

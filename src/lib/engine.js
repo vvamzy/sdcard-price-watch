@@ -16,39 +16,40 @@ export function bankHash(offers) {
 
 /**
  * Poll every due source and turn the observations into a list of alert events.
- * Nothing is written to state here: the caller decides whether the email
- * actually went out, and only then are watermarks advanced.
+ * Record the latest readings in memory; commit() acknowledges individual
+ * notifications only after the caller knows whether their email went out.
  */
-export async function collect({ config, state, now = new Date(), force = false, log = () => {} }) {
-  const observations = [];
-  const skipped = [];
-
-  for (const product of config.products) {
-    for (const offer of product.offers) {
+export async function collect({ config, state, now = new Date(), force = false, log = () => {},
+  fetchPrice = (offer) => adapterFor(offer.retailer).fetchPrice(offer) }) {
+  // Different stores can run concurrently; each retailer still gets one request at a time.
+  const lanes = new Map();
+  const tasks = config.products.flatMap(product => product.offers.map(offer => {
+    const task = (lanes.get(offer.retailer) || Promise.resolve()).then(async () => {
       const st = offerState(state, product.id, offer.retailer);
 
       const cadence = config.polling?.[offer.retailer];
       if (!force && cadence && st.lastPolledAt) {
         const dueAt = new Date(st.lastPolledAt).getTime() + cadence * 60_000;
         if (now.getTime() < dueAt) {
-          skipped.push({ product, offer, reason: `next poll in ${Math.ceil((dueAt - now.getTime()) / 60000)}m` });
-          continue;
+          return { product, offer, reason: `next poll in ${Math.ceil((dueAt - now.getTime()) / 60000)}m` };
         }
       }
 
+      // Older snapshots have only the latest observed discount. Preserve it before polling.
+      if (st.bankHash) st.baselineBankDiscount ??= st.bestBankDiscount || 0;
       const prev = {
         watermark: st.watermark,
         effectiveWatermark: st.effectiveWatermark,
         bankHash: st.bankHash,
-        bankOffers: st.bankOffers || [],
-        bestBankDiscount: st.bestBankDiscount || 0,
+        bestBankDiscount: st.baselineBankDiscount || 0,
         lastAlertAt: st.lastAlertAt,
       };
 
       st.lastPolledAt = iso(now);
 
       try {
-        const r = await adapterFor(offer.retailer).fetchPrice(offer);
+        const r = await fetchPrice(offer);
+        if (r.price != null && (!Number.isFinite(r.price) || r.price <= 0)) throw new Error('invalid listed price');
 
         st.price = r.price;
         st.currency = r.currency || 'INR';
@@ -65,7 +66,7 @@ export async function collect({ config, state, now = new Date(), force = false, 
 
         const effective = r.price != null ? Math.max(0, r.price - (r.bestBankDiscount || 0)) : null;
 
-        observations.push({
+        return {
           product,
           offer,
           state: st,
@@ -74,19 +75,22 @@ export async function collect({ config, state, now = new Date(), force = false, 
           effective,
           priceEval: r.price != null ? evaluate({ watermark: prev.watermark }, r.price) : null,
           bankChanged: Boolean(prev.bankHash) && bankHash(r.bankOffers || st.bankOffers) !== prev.bankHash,
-          firstBankReading: !prev.bankHash,
-        });
+        };
       } catch (err) {
         st.fails = (st.fails || 0) + 1;
         st.lastError = err.message;
         st.lastSeenAt = st.lastSeenAt || null;
         log(`  ! ${product.short} / ${offer.label}: ${err.message} (fail ${st.fails})`);
 
-        observations.push({ product, offer, state: st, prev, error: err.message, failed: true });
+        return { product, offer, state: st, prev, error: err.message, failed: true };
       }
-    }
-  }
-
+    });
+    lanes.set(offer.retailer, task);
+    return task;
+  }));
+  const results = await Promise.all(tasks);
+  const observations = results.filter(r => !r.reason);
+  const skipped = results.filter(r => r.reason);
   const alerts = [];
   const health = [];
 
@@ -108,9 +112,13 @@ export async function collect({ config, state, now = new Date(), force = false, 
     const healthKey = `${product.id}:${offer.retailer}`;
     if (state.meta.healthAlerted[healthKey]) delete state.meta.healthAlerted[healthKey];
 
+    st.effectivePrice = effective;
+    if (r.available !== true || r.price == null) continue;
+
     const cooling = cooldownActive({ lastAlertAt: prev.lastAlertAt }, config.alert?.cooldownHours ?? 0, now.getTime());
 
-    if (priceEval?.drop && !cooling) {
+    // Retry an unreported low only while it is still available at that price or better.
+    if (priceEval?.drop && !cooling && (st.lowestEver == null || r.price <= st.lowestEver)) {
       alerts.push({
         kind: 'price',
         product,
@@ -142,7 +150,6 @@ export async function collect({ config, state, now = new Date(), force = false, 
 
     // Applied in commit() so an undelivered alert is retried next run.
     obs.newBankHash = newHash;
-    st.effectivePrice = effective;
   }
 
   return { observations, alerts, health, skipped };
@@ -164,28 +171,17 @@ export function commit({ state, observations, alerts = [], health = [], delivere
     if (obs.failed) continue;
     const { state: st, prev, result: r } = obs;
 
-    if (obs.newBankHash && (!obs.bankChanged || delivered)) st.bankHash = obs.newBankHash;
-    if (r.price == null) continue;
-
-    const isDrop = Boolean(obs.priceEval?.drop);
-    const undelivered = (isDrop || obs.bankChanged) && !delivered;
-
-    const wasAlerted =
-      delivered &&
-      alerts.some((a) => a.product.id === obs.product.id && a.offer.retailer === obs.offer.retailer);
-    if (wasAlerted) st.lastAlertAt = iso(now);
-
-    if (!undelivered) {
-      st.watermark = prev.watermark == null ? r.price : Math.min(prev.watermark, r.price);
-      st.lowestEver = st.lowestEver == null ? r.price : Math.min(st.lowestEver, r.price);
+    if (r.available !== true || r.price == null) continue;
+    const sent = delivered ? alerts.filter(a => a.product.id === obs.product.id && a.offer.retailer === obs.offer.retailer) : [];
+    if (sent.length) st.lastAlertAt = iso(now);
+    if (!prev.bankHash || sent.some(a => a.kind === 'bank')) {
+      st.bankHash = obs.newBankHash;
+      st.baselineBankDiscount = st.bestBankDiscount;
     }
-    if (st.watermark == null) st.watermark = r.price;
-    if (st.lowestEver == null) st.lowestEver = r.price;
-
-    const effective = obs.effective;
-    if (effective != null && !undelivered) {
-      st.effectiveWatermark =
-        prev.effectiveWatermark == null ? effective : Math.min(prev.effectiveWatermark, effective);
+    if (prev.watermark == null || sent.some(a => a.kind === 'price')) st.watermark = r.price;
+    st.lowestEver = Math.min(st.lowestEver ?? r.price, r.price);
+    if (!obs.bankChanged || sent.some(a => a.kind === 'bank')) {
+      st.effectiveWatermark = Math.min(prev.effectiveWatermark ?? obs.effective, obs.effective);
       st.effectiveLow = st.effectiveWatermark;
     }
   }
@@ -229,7 +225,7 @@ export function summarise({ observations, alerts, health, skipped }) {
     const bank = r.bankOffers?.length
       ? ` [best card offer ${coin(r.bestBankDiscount)} → effective ${effective == null ? 'n/a' : coin(effective)}]`
       : '';
-    const flag = st.available === false ? ' (out of stock)' : '';
+    const flag = st.available === true ? '' : st.available === false ? ' (out of stock)' : ' (stock unknown)';
     lines.push(`✓ ${obs.product.short} / ${obs.offer.label}: ${r.price == null ? 'n/a' : coin(r.price)}${flag}${bank}`);
   }
   for (const s of skipped) lines.push(`· skipped ${s.product.short} / ${s.offer.label} (${s.reason})`);

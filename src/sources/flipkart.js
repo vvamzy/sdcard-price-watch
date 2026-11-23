@@ -28,7 +28,7 @@ export async function fetchPrice(offer) {
       return {
         price,
         currency: 'INR',
-        available: /InStock/i.test(product.availability || ''),
+        available: product.availability ? /InStock$/i.test(product.availability) : null,
         compareAt: null,
         bankOffers,
         bestBankDiscount,
@@ -39,22 +39,7 @@ export async function fetchPrice(offer) {
     }
   }
 
-  // Fallback: the price also appears as `"finalPrice":22990` in embedded state.
-  const fallback = body.match(/"finalPrice":(\d{4,7})/);
-  if (fallback) {
-    return {
-      price: Number(fallback[1]),
-      currency: 'INR',
-      available: !/Sold Out|Out of Stock/i.test(body),
-      compareAt: null,
-      bankOffers,
-      bestBankDiscount,
-      title: null,
-      variantTitle: null,
-      productUrl: offer.url.split('?')[0],
-    };
-  }
-
+  // An unscoped finalPrice can belong to a recommended item. Treat it as a miss.
   throw new Error('no price found on Flipkart page');
 }
 
@@ -74,7 +59,7 @@ export function parseJsonLd(html) {
     }
 
     for (const node of Array.isArray(parsed) ? parsed : [parsed]) {
-      if (!node || (node['@type'] !== 'Product' && !node.offers)) continue;
+      if (!node || node['@type'] !== 'Product') continue;
       const offers = node.offers ? (Array.isArray(node.offers) ? node.offers : [node.offers]) : [];
       const priced = offers.find((o) => o && (o.price || o.lowPrice));
       if (!priced) continue;
@@ -95,7 +80,7 @@ export function parseJsonLd(html) {
  * Dedupe by bank, keeping the largest discount you can actually get.
  */
 export function parseBankOffers(html) {
-  const re = /"offerTitle":"([^"]{1,60})"[\s\S]{0,600}?"discountedPriceText":"₹\s?([\d,]+)\s*off"/g;
+  const re = /"offerTitle":"([^"]{1,60})"(?:(?!"offerTitle")[\s\S]){0,600}?"discountedPriceText":"₹\s?([\d,]+)\s*off"/g;
   const best = new Map();
   let m;
 

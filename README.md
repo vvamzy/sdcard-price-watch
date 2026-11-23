@@ -19,6 +19,9 @@ Ultra (U1/A1) is deliberately excluded. Exact listings live in [`config/products
 |---|---|---|
 | Amazon.in | Mobile product endpoint (`/gp/aw/d/ASIN`) with retries | Buybox card discount + cashback note |
 | Flipkart | schema.org price block | `bankOfferGrid` instant discounts |
+| [Croma (Tata)](https://www.tata.com/business/infiniti) | SanDisk Extreme 64/128GB, matched by Croma SKU. Shows “Stock unknown” when the page omits availability. | Listed price only |
+| [Foto Centre India](https://fotocentreindia.com/) | Lexar Silver Plus 64/128GB, direct from the Mumbai camera store | Listed price only |
+| [Hey Jimmy](https://heyjimmy.in/pages/contact) | SanDisk Extreme 128GB, matched by variant and manufacturer SKU | Listed price only |
 
 **Quick commerce is not tracked.** Blinkit returns HTTP 403 bot challenges, Zepto and Swiggy
 Instamart return ~2KB JavaScript shells with HTTP 202, and BigBasket's server-rendered payload has
@@ -35,7 +38,11 @@ GitHub runner, so no fake adapters were added.
    shows each current card offer and the resulting effective price. Cashback is shown as a note,
    not subtracted from the price.
 
-Failed sends do not advance watermarks — the same drop is retried next run. Three consecutive
+Only a positive listed price with confirmed stock can set a new low or trigger a deal email.
+Existing historical lows are retained. During cooldown or a failed send, a drop stays eligible
+at the observed low or better; a later rebound is not a new low. Card changes are compared with
+the last acknowledged offers. Each store is polled serially, but different stores can run in parallel.
+Three consecutive
 failures on a required source raise one health email. No changes worth reporting produce no email.
 
 ---
